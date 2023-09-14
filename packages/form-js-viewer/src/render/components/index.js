@@ -16,6 +16,16 @@ import Text from './form-fields/Text';
 import Textfield from './form-fields/Textfield';
 import Textarea from './form-fields/Textarea';
 
+import Label from './Label';
+import Description from './Description';
+import Errors from './Errors';
+
+export {
+  Label,
+  Description,
+  Errors
+};
+
 export {
   Button,
   Checkbox,
@@ -55,3 +65,4 @@ export const formFields = [
 ];
 
 export * from './icons';
+export * from './Sanitizer';
