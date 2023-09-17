@@ -11,6 +11,7 @@ import Numberfield from './form-fields/Number';
 import Radio from './form-fields/Radio';
 import Select from './form-fields/Select';
 import Spacer from './form-fields/Spacer';
+import Subform from './form-fields/Subform';
 import Taglist from './form-fields/Taglist';
 import Text from './form-fields/Text';
 import Textfield from './form-fields/Textfield';
@@ -30,6 +31,7 @@ export {
   Radio,
   Select,
   Spacer,
+  Subform,
   Taglist,
   Text,
   Textfield,
@@ -48,6 +50,7 @@ export const formFields = [
   Radio,
   Select,
   Spacer,
+  Subform,
   Taglist,
   Text,
   Textfield,
