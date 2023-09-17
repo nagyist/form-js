@@ -18,6 +18,7 @@ const noop = () => false;
 export default function FormField(props) {
   const {
     field,
+    indexes = {},
     onChange
   } = props;
 
@@ -45,7 +46,7 @@ export default function FormField(props) {
     throw new Error(`cannot render field <${field.type}>`);
   }
 
-  const valuePath = useMemo(() => pathRegistry.getValuePath(field), [ field, pathRegistry ]);
+  const valuePath = useMemo(() => pathRegistry.getValuePath(field, { indexes }), [ field, indexes, pathRegistry ]);
 
   const initialValue = useMemo(() => get(initialData, valuePath), [ initialData, valuePath ]);
 
@@ -72,6 +73,12 @@ export default function FormField(props) {
 
   const hidden = useCondition(field.conditional && field.conditional.hide || null);
 
+  const onChangeIndexed = useCallback((update) => {
+
+    // add indexes of the keyed field to the update, if any
+    onChange(FormFieldComponent.config.keyed ? { ...update, indexes } : update);
+  }, [ onChange, FormFieldComponent.config.keyed, indexes ]);
+
   if (hidden) {
     return <Empty />;
   }
@@ -83,7 +90,7 @@ export default function FormField(props) {
           { ...props }
           disabled={ disabled }
           errors={ errors[ field.id ] }
-          onChange={ disabled || readonly ? noop : onChange }
+          onChange={ disabled || readonly ? noop : onChangeIndexed }
           onBlur={ disabled || readonly ? noop : onBlur }
           readonly={ readonly }
           value={ value } />
