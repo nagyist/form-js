@@ -1,4 +1,4 @@
-import { INPUTS } from '../Util';
+import { INPUTS, LABELED_NON_INPUTS } from '../Util';
 import { DATETIME_SUBTYPES, DATE_LABEL_PATH, TIME_LABEL_PATH } from '@bpmn-io/form-js-viewer';
 import { useService, useVariables } from '../hooks';
 import { FeelTemplatingEntry, isFeelEntryEdited } from '@bpmn-io/properties-panel';
@@ -41,7 +41,7 @@ export default function LabelEntry(props) {
       );
     }
   }
-  else if (INPUTS.includes(type) || type === 'button' || type === 'group') {
+  else if (INPUTS.includes(type) || LABELED_NON_INPUTS.includes(type)) {
     entries.push(
       {
         id: 'label',
@@ -77,7 +77,7 @@ function Label(props) {
     return editField(field, path, value || '');
   };
 
-  const label = field.type === 'group' ? 'Group label' : 'Field label';
+  const label = [ 'group', 'subform' ].includes(field.type) ? 'Group label' : 'Field label';
 
   return FeelTemplatingEntry({
     debounce,
