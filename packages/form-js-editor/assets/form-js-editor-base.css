@@ -634,7 +634,8 @@
   width: 68px;
 }
 
-.fjs-palette-field .fjs-palette-field-icon {
+.fjs-palette-field .fjs-palette-field-icon,
+.fjs-palette-field .fjs-field-icon-image {
   margin: 0 auto;
 }
 
