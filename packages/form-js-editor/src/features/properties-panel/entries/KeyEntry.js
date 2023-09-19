@@ -2,7 +2,7 @@ import { isUndefined } from 'min-dash';
 
 import { get } from 'min-dash';
 
-import { INPUTS, isValidDotPath } from '../Util';
+import { isValidDotPath } from '../Util';
 
 import { useService } from '../hooks';
 
@@ -12,16 +12,20 @@ import { TextFieldEntry, isTextFieldEntryEdited } from '@bpmn-io/properties-pane
 export default function KeyEntry(props) {
   const {
     editField,
-    field
+    field,
+    getService
   } = props;
 
   const {
     type
   } = field;
 
+  const formFields = getService('formFields');
+  const { config } = formFields.get(type);
+
   const entries = [];
 
-  if (INPUTS.includes(type)) {
+  if (config.keyed) {
     entries.push({
       id: 'key',
       component: Key,
