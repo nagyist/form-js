@@ -77,7 +77,7 @@ function Label(props) {
     return editField(field, path, value || '');
   };
 
-  const label = [ 'group', 'subform' ].includes(field.type) ? 'Group label' : 'Field label';
+  const label = [ 'group', 'dynamiclist' ].includes(field.type) ? 'Group label' : 'Field label';
 
   return FeelTemplatingEntry({
     debounce,
