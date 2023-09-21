@@ -19,6 +19,7 @@ export default function Textarea(props) {
   const {
     disabled,
     errors = [],
+    errorMessageId,
     onBlur,
     field,
     readonly,
@@ -52,7 +53,6 @@ export default function Textarea(props) {
   }, []);
 
   const { formId } = useContext(FormContext);
-  const errorMessageId = errors.length === 0 ? undefined : `${prefixId(id, formId)}-error-message`;
 
   return <div class={ formFieldClasses(type, { errors, disabled, readonly }) }>
     <Label

@@ -23,6 +23,7 @@ export default function Checklist(props) {
   const {
     disabled,
     errors = [],
+    errorMessageId,
     onBlur,
     field,
     readonly,
@@ -71,7 +72,6 @@ export default function Checklist(props) {
   } = useValuesAsync(field);
 
   const { formId } = useContext(FormContext);
-  const errorMessageId = errors.length === 0 ? undefined : `${prefixId(id, formId)}-error-message`;
 
   return <div class={ classNames(formFieldClasses(type, { errors, disabled, readonly })) } ref={ outerDivRef }>
     <Label
