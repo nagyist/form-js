@@ -36,7 +36,7 @@ export default function FormField(props) {
 
   const {
     Element,
-    Empty,
+    Hidden,
     Column
   } = useContext(FormRenderContext);
 
@@ -82,7 +82,7 @@ export default function FormField(props) {
   }, [ onChange, FormFieldComponent.config.keyed, indexes ]);
 
   if (hidden) {
-    return <Empty />;
+    return <Hidden field={ field } />;
   }
 
   const fieldErrors = get(errors, [ field.id, ...Object.values(indexes || {}) ]) || [];
