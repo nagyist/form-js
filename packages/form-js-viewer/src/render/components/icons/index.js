@@ -9,7 +9,7 @@ import NumberIcon from './Number.svg';
 import RadioIcon from './Radio.svg';
 import SelectIcon from './Select.svg';
 import SpacerIcon from './Spacer.svg';
-import DynamicListIcon from './Group.svg';
+import DynamicListIcon from './DynamicList.svg';
 import TextIcon from './Text.svg';
 import TextfieldIcon from './Textfield.svg';
 import TextareaIcon from './Textarea.svg';
