@@ -33,7 +33,7 @@ function getGroups(field, editField, getService) {
     GeneralGroup(field, editField, getService),
     ConditionGroup(field, editField),
     LayoutGroup(field, editField),
-    AppearanceGroup(field, editField),
+    AppearanceGroup(field, editField, getService),
     SerializationGroup(field, editField),
     ...ValuesGroups(field, editField),
     ConstraintsGroup(field, editField),
