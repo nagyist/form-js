@@ -252,6 +252,7 @@
 
 .fjs-editor-container .fjs-form > .fjs-element {
   border: none;
+  outline: none;
 }
 
 .fjs-editor-container .fjs-form-field:not(.fjs-powered-by) {
