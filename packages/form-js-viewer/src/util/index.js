@@ -85,6 +85,22 @@ export function clone(data, replacer) {
 }
 
 /**
+ * Wrap an expression context with additional local context.
+ * A version of the local context with underscore-wrapped keys is also injected as fallback.
+ *
+ * @param {Object} baseContext - The context to wrap.
+ * @param {Object} localContext - The local context object.
+ * @returns {Object} The merged context object.
+ */
+export function wrapExpressionContext(baseContext, localContext) {
+  return {
+    ...localContext,
+    ...baseContext,
+    ..._wrapObjectKeysWithUnderscores(localContext)
+  };
+}
+
+/**
  * Parse the schema for input variables a form might make use of
  *
  * @param {any} schema
@@ -192,4 +208,14 @@ export function runRecursively(formField, fn) {
   });
 
   fn(formField);
+}
+
+// helpers //////////////////////
+
+function _wrapObjectKeysWithUnderscores(obj) {
+  const newObj = {};
+  for (const [ key, value ] of Object.entries(obj)) {
+    newObj[`_${key}_`] = value;
+  }
+  return newObj;
 }
