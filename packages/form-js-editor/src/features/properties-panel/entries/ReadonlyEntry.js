@@ -19,7 +19,7 @@ export default function ReadonlyEntry(props) {
 
   const entries = [];
 
-  if (INPUTS.includes(type)) {
+  if (INPUTS.includes(type) || type === 'dynamiclist') {
     entries.push({
       id: 'readonly',
       component: Readonly,
