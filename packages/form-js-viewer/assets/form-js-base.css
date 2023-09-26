@@ -937,7 +937,10 @@
 .fjs-container .fjs-repeat-row-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+}
+
+.fjs-container .fjs-repeat-row-rows {
+  flex: 1;
 }
 
 .fjs-container .fjs-repeat-row-container .fjs-repeat-row-delete {
@@ -966,7 +969,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: 16px 8px;
 }
 
 .fjs-container .fjs-repeat-render-footer button {
@@ -983,7 +986,7 @@
 }
 
 .fjs-container .fjs-repeat-render-footer button svg {
-  margin-right: 2px;
+  margin-right: 4px;
 }
 
 /**

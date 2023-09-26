@@ -55,6 +55,8 @@ export default class RepeatRenderManager {
 
     const nonCollapsedItems = this._getNonCollapsedItems(repeaterField);
     const isCollapsed = sharedRepeatState.isCollapsed && values.length > nonCollapsedItems;
+    const hasChildren = repeaterField.components && repeaterField.components.length > 0;
+    const showRemove = repeaterField.allowAddRemove && hasChildren;
 
     const displayValues = isCollapsed ? values.slice(0, nonCollapsedItems) : values;
 
@@ -86,14 +88,20 @@ export default class RepeatRenderManager {
             i: [ ...parentExpressionContext.i , index + 1 ]
           }), [ index, value ]);
 
-          return <div class="fjs-repeat-row-container">
+          return !showRemove ?
             <LocalExpressionContext.Provider value={ localExpressionContext }>
               <RowsRenderer { ...elementProps } />
-            </LocalExpressionContext.Provider>
-            <button class="fjs-repeat-row-delete" onClick={ () => onDeleteItem(index) }>
-              <DeleteSvg />
-            </button>
-          </div>;
+            </LocalExpressionContext.Provider> :
+            <div class="fjs-repeat-row-container">
+              <div class="fjs-repeat-row-rows">
+                <LocalExpressionContext.Provider value={ localExpressionContext }>
+                  <RowsRenderer { ...elementProps } />
+                </LocalExpressionContext.Provider>
+              </div>
+              <button class="fjs-repeat-row-delete" onClick={ () => onDeleteItem(index) }>
+                <DeleteSvg />
+              </button>
+            </div>;
         })}
       </>
     );
@@ -113,6 +121,9 @@ export default class RepeatRenderManager {
     const nonCollapsedItems = this._getNonCollapsedItems(repeaterField);
     const collapseEnabled = !repeaterField.disableCollapse && (values.length > nonCollapsedItems);
     const isCollapsed = sharedRepeatState.isCollapsed;
+
+    const hasChildren = repeaterField.components && repeaterField.components.length > 0;
+    const showAdd = repeaterField.allowAddRemove && hasChildren;
 
     const toggle = () => {
       setSharedRepeatState(state => ({ ...state, isCollapsed: !isCollapsed }));
@@ -146,9 +157,9 @@ export default class RepeatRenderManager {
       offset: 20
     }, [ shouldScroll ]);
 
-    return <div className="fjs-repeat-render-footer" style={ !repeaterField.readonly ? { marginRight: 32 } : {} }>
+    return <div className="fjs-repeat-render-footer" style={ repeaterField.allowAddRemove ? { marginRight: 32 } : { justifyContent: 'center' } }>
       {
-        !repeaterField.readonly ? <button ref={ addButtonRef } onClick={ onAddItem }>
+        showAdd ? <button ref={ addButtonRef } onClick={ onAddItem }>
           <><AddSvg /> { 'Add new' }</>
         </button> : null
       }
