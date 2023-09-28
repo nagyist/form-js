@@ -39,6 +39,9 @@ export default class ConditionChecker {
       if (context.isHidden && isClosed) {
         const valuePath = this._pathRegistry.getValuePath(field);
         this._clearObjectValueRecursively(valuePath, newProperties);
+
+        // clean up values that are not referenced via valuesPath as well
+        field.id && this._clearObjectValueRecursively([ field.id ], newProperties);
       }
     });
 

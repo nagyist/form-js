@@ -14,6 +14,7 @@ import { spy } from 'sinon';
 import customButtonModule from './custom';
 
 import conditionSchema from './condition.json';
+import conditionErrorsSchema from './condition-errors.json';
 import hiddenFieldsConditionalSchema from './hidden-fields-conditional.json';
 import hiddenFieldsExpressionSchema from './hidden-fields-expression.json';
 import disabledSchema from './disabled.json';
@@ -1294,6 +1295,27 @@ describe('Form', function() {
 
       // then
       expect(data).not.to.have.property('text');
+    });
+
+
+    it('should NOT submit errors for hidden fields', async function() {
+
+      // given
+      const initialData = {
+        checkbox_4u82gk: true
+      };
+
+      const form = await createForm({
+        container,
+        data: initialData,
+        schema: conditionErrorsSchema
+      });
+
+      // when
+      const { errors } = form.submit();
+
+      // then
+      expect(errors).to.not.have.property('Field_17uk1c9');
     });
 
   });
