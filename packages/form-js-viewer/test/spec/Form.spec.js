@@ -1313,9 +1313,11 @@ describe('Form', function() {
 
       // when
       const { errors } = form.submit();
+      const { errors: stateErrors } = form._getState();
 
       // then
       expect(errors).to.not.have.property('Field_17uk1c9');
+      expect(stateErrors).to.not.have.property('Field_17uk1c9');
     });
 
   });
